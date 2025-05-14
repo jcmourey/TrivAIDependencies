@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "TrivAIDependencies",
-    platforms: [.iOS(.v18), .macOS(.v15), .tvOS(.v15)],
+    platforms: [.iOS(.v18), .macOS(.v15), .tvOS(.v18)],
     products: DependencyManifest.all.flatMap(\.products),
     dependencies: .all,
     targets: DependencyManifest.all.flatMap(\.targets),
@@ -29,6 +29,7 @@ extension DependencyManifest {
             dependencies: [
                 "TrivAIModel",
                 .product(name: "Tiktoken", package: "Tiktoken"),
+                .product(name: "EventSource", package: "EventSource")
             ],
             liveDependencies: [.product(name: "EventSource", package: "EventSource")],
             resources: [.process("Resources")]
