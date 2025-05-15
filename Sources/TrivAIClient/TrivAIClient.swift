@@ -15,12 +15,23 @@ public struct TrivAIClient: Sendable {
     ) async throws -> AsyncThrowingStream<ResponseEvent, Error>
 }
 
+public enum TrivAIClientError: Error {
+    case invalidURL(String)
+    case missingResource(String)
+    case invalidURLComponents(URLComponents)
+    case missingEventType(EVEvent)
+    case missingEventData(EVEvent)
+    case invalidEventType(String)
+    case stringCantBeDecodedToData(String)
+    case openAIError(String)
+    case openAIRefusal(String)
+}
 
 public enum ResponseEvent {
     case partial(Response)
     case complete(documentID: String)
     
-    init(from evEvent: EVEvent) throws {
+    public init(from evEvent: EVEvent) throws {
         guard let eventTypeString = evEvent.event else {
             throw TrivAIClientError.missingEventType(evEvent)
         }
@@ -34,28 +45,18 @@ public enum ResponseEvent {
             }
             let response = try JSONDecoder().decode(Response.self, from: eventData)
             self = .partial(response)
+            
         case "error":
             throw TrivAIClientError.openAIError(eventDataString)
-
+            
         case "refusal":
-        case "complete":
-        default:
-            throw TrivAIClientError.invalidEventType(eventType)
-        }
-        
-        
-        guard let eventData = eventDataString.data(using: .utf8) else {
-            throw TrivAIClientError.stringCantBeDecodedToData(eventDataString)
-        }
-        switch eventType {
-        case .partial:
-            continuation.yield(.partial(response))
-        case .error:
-            throw TrivAIClientError.openAIError(eventDataString)
-        case .refusal:
             throw TrivAIClientError.openAIRefusal(eventDataString)
-        case .complete:
-            let document = try JSONDecoder().decode(TrivAIDocument.self, from: eventData)
-            continuation.yield(.complete(document))
-        }    }
+            
+        case "complete":
+            self = .complete(documentID: eventDataString)
+            
+        default:
+            throw TrivAIClientError.invalidEventType(eventTypeString)
+        }
+    }
 }

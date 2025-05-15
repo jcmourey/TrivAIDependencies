@@ -2,6 +2,8 @@
     "id": "DGhGr4Gj4G6eVvnC6dDj",
     "creation_date": "2025-05-11T18:49:41.860000+00:00",
     "response": {
+        "title": "Toys Trivia for 10-Year-Olds",
+        "introduction": "Hello, fun friends! Are you ready to test your toy knowledge and have a blast? Let\u2019s dive into some exciting questions about toys from your childhood and beyond!",
         "questions": [
             {
                 "choices": [
@@ -53,9 +55,7 @@
                 "explanation": "The correct answer is Paddleball, which involves bouncing a ball attached to a paddle repeatedly.",
                 "question": "What kind of toy is a 'Paddleball', which you hit with a paddle and try to keep bouncing?"
             }
-        ],
-        "title": "Toys Trivia for 10-Year-Olds",
-        "introduction": "Hello, fun friends! Are you ready to test your toy knowledge and have a blast? Let\u2019s dive into some exciting questions about toys from your childhood and beyond!"
+        ]
     },
     "prompt": {
         "user_message": "Generate 5 trivia question(s) on the topic 'Toys' in English with difficulty '10 years old'.",

@@ -15,6 +15,8 @@ extension TrivAIClient: TestDependencyKey {
     public static let testValue = Self(
         stream: { _,_,_,_,_ in
             let mock: String = try loadJSONResource(from: "TrivAIClientMock")
+            let encoder = try await Tiktoken.shared.getEncoding("gpt-4.1-nano")
+            let tokens = encoder?.encode(value: mock)
             let words = mock.splitRandomly(minLength: 1, maxLength: 12)
 
             return AsyncThrowingStream { continuation in

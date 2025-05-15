@@ -34,28 +34,9 @@ extension TrivAIClient: DependencyKey {
                         case .error(let error):
                             print("Received an error:", error.localizedDescription)
                         case .event(let event):
-                            guard let eventTypeString = event.event, let eventType = ResponseEventType(rawValue: eventTypeString) else {
-                                throw TrivAIClientError.unknownEventType(event.event)
-                            }
-                            guard let eventDataString = event.data else {
-                                throw TrivAIClientError.noDataForEventType(eventType)
-                            }
-                            guard let eventData = eventDataString.data(using: .utf8) else {
-                                throw TrivAIClientError.stringCantBeDecodedToData(eventDataString)
-                            }
-                            switch eventType {
-                            case .partial:
-                                let response = try JSONDecoder().decode(Response.self, from: eventData)
-                                continuation.yield(.partial(response))
-                            case .error:
-                                throw TrivAIClientError.openAIError(eventDataString)
-                            case .refusal:
-                                throw TrivAIClientError.openAIRefusal(eventDataString)
-                            case .complete:
-                                let document = try JSONDecoder().decode(TrivAIDocument.self, from: eventData)
-                                continuation.yield(.complete(document))
-                            }
-                            print("Received an event", event.data ?? "")
+                            let responseEvent = try ResponseEvent(from: event)
+                            print("Received an event", responseEvent)
+                            continuation.yield(responseEvent)
                         case .closed:
                             print("Connection was closed.")
                         }
