@@ -16,8 +16,7 @@ extension [Package.Dependency] {
         [
             .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2"),
             .package(url: "https://github.com/Recouse/EventSource.git", from: "0.1.4"),
-            .package(url: "https://github.com/aespinilla/Tiktoken.git", branch: "main"),
-            .package(path: "../TrivAIModel")
+            .package(path: "../TrivAIModel"),
        ]
     }
 }
@@ -27,9 +26,8 @@ extension DependencyManifest {
         .init(
             name: "TrivAIClient",
             dependencies: [
-                "TrivAIModel",
-                .product(name: "Tiktoken", package: "Tiktoken"),
-                .product(name: "EventSource", package: "EventSource")
+                .product(name: "TrivAIResponseModel", package: "TrivAIModel"),
+                .product(name: "EventSource", package: "EventSource"),
             ],
             liveDependencies: [.product(name: "EventSource", package: "EventSource")],
             resources: [.process("Resources")]

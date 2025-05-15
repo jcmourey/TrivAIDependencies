@@ -1,0 +1,56 @@
+{
+    "title": "Toys Trivia for 10-Year-Olds",
+    "introduction": "Hello, fun friends! Are you ready to test your toy knowledge and have a blast? Let\u2019s dive into some exciting questions about toys from your childhood and beyond!",
+    "questions": [
+        {
+            "choices": [
+                "LEGO",
+                "Tootsie Rolls",
+                "Chocolate Bars",
+                "Sandcastles"
+            ],
+            "explanation": "The correct answer is LEGO, a famous brand of interlocking plastic bricks known worldwide for building creativity.",
+            "questionText": "What is the name of the popular building toy that uses colorful interlocking bricks?"
+        },
+        {
+            "choices": [
+                "Beyblade",
+                "Yo-yo",
+                "Top",
+                "Sand Dune"
+            ],
+            "explanation": "The correct answer is Top, a classic spinning toy that has been enjoyed for generations.",
+            "questionText": "Which toy is known for its spinning top that comes in a variety of colors and patterns?"
+        },
+        {
+            "choices": [
+                "Superheroes",
+                "Action Figures",
+                "Transformers",
+                "Star Wars"
+            ],
+            "explanation": "Although all options are related, the specific toy line featuring characters from Marvel and DC movies is called Action Figures.",
+            "questionText": "What is the name of the toy line that features action figures based on characters from popular movies like Marvel and DC?"
+        },
+        {
+            "choices": [
+                "Barbie",
+                "Bratz",
+                "Dora the Explorer",
+                "Cinderella"
+            ],
+            "explanation": "The correct answer is Barbie, a renowned doll with long blonde hair and countless adventures.",
+            "questionText": "Which doll is famous for her long, blonde hair and her adventures in a magical land?"
+        },
+        {
+            "choices": [
+                "A bouncing ball game",
+                "A paddleball",
+                "A skipping rope",
+                "A flying disc"
+            ],
+            "explanation": "The correct answer is Paddleball, which involves bouncing a ball attached to a paddle repeatedly.",
+            "questionText": "What kind of toy is a 'Paddleball', which you hit with a paddle and try to keep bouncing?"
+        }
+    ]
+}

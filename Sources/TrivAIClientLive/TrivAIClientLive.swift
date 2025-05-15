@@ -1,7 +1,7 @@
 import Foundation
 import Dependencies
 import TrivAIClient
-import TrivAIModel
+import TrivAIResponseModel
 import EventSource
 
 extension TrivAIClient: DependencyKey {

@@ -1,6 +1,6 @@
 import DependenciesMacros
 import Dependencies
-import TrivAIModel
+import TrivAIResponseModel
 import EventSource
 import Foundation
 
@@ -17,7 +17,6 @@ public struct TrivAIClient: Sendable {
 
 public enum TrivAIClientError: Error {
     case invalidURL(String)
-    case missingResource(String)
     case invalidURLComponents(URLComponents)
     case missingEventType(EVEvent)
     case missingEventData(EVEvent)
@@ -27,7 +26,7 @@ public enum TrivAIClientError: Error {
     case openAIRefusal(String)
 }
 
-public enum ResponseEvent {
+public enum ResponseEvent: Sendable {
     case partial(Response)
     case complete(documentID: String)
     
