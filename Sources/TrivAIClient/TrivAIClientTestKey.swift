@@ -1,5 +1,5 @@
-import Dependencies
 import Foundation
+import Dependencies
 import TrivAIResponseModel
 import EventSource
 

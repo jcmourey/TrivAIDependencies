@@ -1,8 +1,8 @@
+import Foundation
 import DependenciesMacros
 import Dependencies
 import TrivAIResponseModel
 import EventSource
-import Foundation
 
 @DependencyClient
 public struct TrivAIClient: Sendable {

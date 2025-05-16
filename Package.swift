@@ -23,10 +23,11 @@ let githubPackages: [GithubPackageManifest] = [
     .init(provider: "bitkey-oss", name: "sharing-firestore", modules: ["SharingFirestore"], minVersion: "0.2.0"),
 ]
 
+// TODO: Could be derived from looking at all the modules in all the Package.swift files, a bit hard to do
 let localPackages: [LocalPackageManifest] = [
     .init(name: "TrivAIModel", modules: ["TrivAIResponseModel"]),
     .init(name: "TrivAIMacros", modules: ["TrivAIMacros"]),
-    .init(name: "TrivAIDependencies", modules: ["TrivAIClient"]),
+    .init(name: "TrivAIDependencies", modules: ["TrivAIClient", "TrivAIClientLive"]),
 ]
 
 let availablePackages: [any PackageManifest] = githubPackages as [any PackageManifest] + localPackages as [any PackageManifest]
