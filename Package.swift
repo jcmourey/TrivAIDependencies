@@ -1,7 +1,7 @@
 let packageName = "TrivAIDependencies"
 
 let modules: [ModuleManifest] = [
-    DependencyModuleManifest(name: "TrivAIClient", dependencies: ["TrivAIResponseModel", "EventSource"], resources: ["Resources"], liveDependencies: ["EventSource"]),
+    DependencyModuleManifest(name: "TrivAIClient", dependencies: ["TrivAIResponseModel", "EventSource"], testDependencies: ["InlineSnapshotTesting"], resources: ["Resources"], liveDependencies: ["EventSource"]),
 ]
 
 // #include("Packages/PackageCommon/Package.swift")
@@ -16,6 +16,7 @@ let platforms: [SupportedPlatform] = [.iOS(.v18), .macOS(.v15), .tvOS(.v18)]
 // PACKAGES
 let githubPackages: [GithubPackageManifest] = [
     .init(provider: "pointfreeco", name: "swift-dependencies", modules: ["Dependencies", "DependenciesMacros", "DependenciesTestSupport"], minVersion: "1.9.2"),
+    .init(provider: "pointfreeco", name: "swift-snapshot-testing", modules: ["SnapshotTesting", "InlineSnapshotTesting"], minVersion: "1.18.3"),
     .init(provider: "Recouse", name: "EventSource", modules: ["EventSource"], minVersion: "0.1.4"),
     .init(provider: "pointfreeco", name: "swift-composable-architecture", modules: ["ComposableArchitecture"], minVersion: "1.19.1"),
     .init(provider: "swiftlang", name: "swift-syntax", modules: ["SwiftSyntaxMacros", "SwiftCompilerPlugin"], minVersion: "601.0.1"),

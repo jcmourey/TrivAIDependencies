@@ -42,26 +42,22 @@ extension TrivAIClient: TestDependencyKey {
                 Task {
                     let mock: Response = try loadJSONResource(from: "TrivAIClientMockResponse")
                     
-                    // Send mock Response bit by bit
+                    // Send mock Response bit by bit with the growing() method
                     
                     // 1. Send empty Response
                     try await continueWithDelay(.partial(Response()))
                     
-                    // 2. Send the title bit by bit
                     for title in mock.title.growing() {
                         try await continueWithDelay(.partial(Response(title: title)))
                     }
                     
-                    // 3. Send the introduction bit by bit
                     for introduction in mock.introduction.growing() {
                         try await continueWithDelay(.partial(Response(title: mock.title, introduction: introduction)))
                     }
                     
-                    // 4. For each question, send the question text bit by bit, then each choice, then the explanation bit by bit
                     var questions = [Response.Question]()
                     for question in mock.questions {
                         for questionText in question.questionText.growing() {
-                            print("questionText", questionText)
                             try await continueWithDelay(.partial(Response(title: mock.title, introduction: mock.introduction, questions: questions + [Response.Question(questionText: questionText)])))
                         }
                         var choices = [String]()
@@ -75,7 +71,7 @@ extension TrivAIClient: TestDependencyKey {
                         questions.append(question)
                     }
                     
-                    // 5. Send a document id to finish
+                    // Send a document id to finish
                     continuation.yield(ResponseEvent.complete(documentID: uuid().uuidString))
                     continuation.finish()
                 }
@@ -86,15 +82,12 @@ extension TrivAIClient: TestDependencyKey {
 
 
 func loadJSONResource<T: Decodable>(from filename: String) throws -> T {
-    // 1. Find the URL for filename.json in your bundle
     guard let url = Bundle.module.url(forResource: filename, withExtension: "json") else {
         throw TrivAIClientTestError.missingResource("\(filename).json")
     }
 
-    // 2. Read the raw data…
     let data = try Data(contentsOf: url)
     
-    // 3. Return decoded data
     let decoded = try JSONDecoder().decode(T.self, from: data)
     return decoded
 }

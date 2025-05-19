@@ -1,7 +1,6 @@
 import Foundation
 import Dependencies
 import TrivAIClient
-import TrivAIResponseModel
 import EventSource
 
 extension TrivAIClient: DependencyKey {
@@ -10,7 +9,7 @@ extension TrivAIClient: DependencyKey {
             AsyncThrowingStream { continuation in
                 Task {
                     let urlString = "http://localhost:8080/stream"
-                    guard var components = URLComponents(string: "http://localhost:8080/stream") else {
+                    guard var components = URLComponents(string: urlString) else {
                         throw TrivAIClientError.invalidURL(urlString)
                     }
                     let numberOfQuestionsString = if let numberOfQuestions { "\(numberOfQuestions)" } else { nil as String? }
@@ -32,10 +31,9 @@ extension TrivAIClient: DependencyKey {
                         case .open:
                             print("Connection was opened.")
                         case .error(let error):
-                            print("Received an error:", error.localizedDescription)
+                            throw error
                         case .event(let event):
                             let responseEvent = try ResponseEvent(from: event)
-                            print("Received an event", responseEvent)
                             continuation.yield(responseEvent)
                         case .closed:
                             print("Connection was closed.")
